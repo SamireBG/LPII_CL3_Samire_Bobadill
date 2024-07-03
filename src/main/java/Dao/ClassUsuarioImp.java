@@ -13,24 +13,30 @@ public class ClassUsuarioImp implements InterfaceUsuariocl3{
 
 	@Override
 	public void RegistrarUsuario(TblUsuariocl3 usuario) {
-		
-		//establecer la cadena de conexion con la unidad de persistencia
-		EntityManagerFactory fabr=Persistence.createEntityManagerFactory("LPII_CL3_Samire_Bobadilla");
-		//gestionar las entidades
-		EntityManager em=fabr.createEntityManager();
-		//iniciamos la transaccion
-		em.getTransaction().begin();
-		//registramos
-		em.persist(usuario);
-		//emitimos mensaje por consola
-		System.out.print("Usuario registrado en la BD");
-		//configuramos
-		em.getTransaction().commit();
-		//cerramos
-		em.close();
-		
-		
+	    // establecer la cadena de conexion con la unidad de persistencia
+	    EntityManagerFactory fabr = Persistence.createEntityManagerFactory("LPII_CL3_Samire_Bobadilla");
+	    // gestionar las entidades
+	    EntityManager em = fabr.createEntityManager();
+	    try {
+	        // iniciamos la transaccion
+	        em.getTransaction().begin();
+	        // registramos
+	        em.persist(usuario);
+	        // emitimos mensaje por consola
+	        System.out.print("Usuario registrado en la BD");
+	        // configuramos
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        // cerramos
+	        em.close();
+	    }
 	}
+
 
 	@Override
 	public List<TblUsuariocl3> ListadoUsuario() {

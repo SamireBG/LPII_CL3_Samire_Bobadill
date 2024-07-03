@@ -30,7 +30,7 @@
         <div class="container-page" id="Container">
             <div class="login-container" id="LoginContainer">
             <h1 class="title">CREA TU CUENTA</h1>
-                <form action="ControladorUsuario" method="post">
+                <form action="ControladorUsuario" method="post" onsubmit="this.querySelector('button[type=submit]').disabled = true;">
                     <div class="input-line-container">
                         <span class="name-input">Usuario</span>
                         <input type="text" name="usuario" class="input-line" required>

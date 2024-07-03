@@ -61,22 +61,27 @@
 <button class="boton-reg" onclick="window.location.href = 'RegistrarProducto.jsp';">REGISTRAR PRODUCTOS</button>
 <table class="tabla-productos" border="2">
     <tr>
+    	<th>CODIGO</th>
         <th>NOMBRE</th>
         <th>P. VENTA</th>
         <th>P. COMPRA</th>
         <th>ESTADO</th>
         <th>DESCRIPCION</th>
+        <th colspan="2" align="center">ACCIONES</th>
     </tr>
     <% List<TblProductocl3> listadoproducto = (List<TblProductocl3>)request.getAttribute("listadoproducto");
     if(listadoproducto!=null){
         for(TblProductocl3 listar : listadoproducto){
     %>
     <tr>
+    	<td><%=listar.getIdproductocl3()%></td>
         <td><%=listar.getNombrecl3()%></td>
         <td><%=listar.getPrecioventacl3()%></td>
         <td><%=listar.getPreciocompcl3()%></td>
         <td><%=listar.getEstadocl3()%></td>
         <td><%=listar.getDescripcl3()%></td>
+        <td><a href="ControladorProducto?accion=Eliminar&cod=<%=listar.getIdproductocl3()%>">Eliminar</a></td>
+		<td><a href="ControladorProducto?accion=Modificar&cod=<%=listar.getIdproductocl3()%>">Actualizar</a></td>
     </tr>
     <% }//fin del bucle for %> <% }//fin de la condicion %> </table>
 
